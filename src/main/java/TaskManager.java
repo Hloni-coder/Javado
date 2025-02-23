@@ -1,31 +1,30 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskManager {
-    private List<String> tasks;
+public class TaskManager {
+    private List<Task> tasks; 
 
     public TaskManager() {
+        // Initialize tasks list
         tasks = new ArrayList<>();
     }
-
-    public void addTask(String task) {
+    public void addTask(String name) {
+        Task task = new Task(name);
         tasks.add(task);
-        System.out.println("Task added: " + task);
     }
 
-    public List<String> listTasks() {
+    public List<Task> listTasks() {
         return tasks;
     }
 
-    public void deleteTask(String task) {
-        if (tasks.remove(task)) {
-            System.out.println("Task deleted: " + task);
-        } else {
-            System.out.println("Task not found: " + task);
-        }
+    public void deleteTask(String taskName) {
+        tasks.removeIf(task -> task.getName().equals(taskName)); 
     }
 
     public void exit() {
-       
+        System.out.println("Exiting... Saving tasks...");
+        for (Task task : tasks) {
+            System.out.println("Saved task: " + task.getName()); 
+        }
     }
 }
